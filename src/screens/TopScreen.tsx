@@ -1,20 +1,27 @@
 import React from 'react';
 import Layout from '../Layout';
-import { Heading, Button } from 'arwes';
+import { Project, Words } from 'arwes';
 
 const TopScreen: React.FC = () => {
     return (
         <Layout>
-            <Heading node='h1'>SciFi UI Framework</Heading>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <Button animate>Cyberpunk</Button>
+            <Project
+                animate
+                header='現在の室温: 24℃&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;エアコン: OFF'
+            >
+                {(anim: any) => (
+                    <div>
+                        <p><Words animate show={anim.entered}>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                            sed do eiusmod tempor incididunt ut labore et dolore magna
+                            aliqua. Ut enim ad minim veniam, quis laboris nisi ut aliquip
+                            ex. Duis aute irure. Consectetur adipisicing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            Ut enim ad minim veniam, quis nostrud.
+                        </Words></p>
+                    </div>
+                )}
+            </Project>
         </Layout>
     );
 }

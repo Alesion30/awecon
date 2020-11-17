@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Arwes, Header, Heading } from 'arwes';
+import { Arwes, Header, Heading, Footer } from 'arwes';
 
 interface IProps {
     children: ReactNode
@@ -7,13 +7,20 @@ interface IProps {
 const Layout: React.FC<IProps> = (props: IProps) => {
     return (
         <Arwes animate>
-            <div style={{ padding: 20 }}>
-                <Header animate>
-                    <Heading node='h1' style={{ margin: 0 }}>AWECON - We control air condition from a remote location</Heading>
-                </Header>
-            </div>
-            <div style={{ padding: 30 }}>
-                {props.children}
+            <div>
+                <div style={{ padding: 20 }}>
+                    <Header animate>
+                        <Heading node='h1' style={{ margin: 0 }}>AWECON - We control air condition from a remote location</Heading>
+                    </Header>
+                </div>
+                <div style={{ padding: 30, minHeight: '83vh' }}>
+                    {props.children}
+                </div>
+                <div style={{ paddingLeft: 20, paddingRight: 20 }}>
+                    <Footer animate>
+                        <Heading node='h6'>&copy; 2020 AWECON</Heading>
+                    </Footer>
+                </div>
             </div>
         </Arwes>
     );
