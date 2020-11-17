@@ -1,10 +1,12 @@
 import React, { ReactNode } from 'react';
 import { Arwes, Header, Heading, Footer } from 'arwes';
+import { useWindowDimensions } from './util/dimensions';
 
 interface IProps {
     children: ReactNode
 }
 const Layout: React.FC<IProps> = (props: IProps) => {
+    const { height } = useWindowDimensions(); // 画面サイズ
     return (
         <Arwes animate>
             <div>
@@ -13,7 +15,7 @@ const Layout: React.FC<IProps> = (props: IProps) => {
                         <Heading node='h1' style={{ margin: 0 }}>AWECON - We control air condition from a remote location</Heading>
                     </Header>
                 </div>
-                <div style={{ padding: 30, minHeight: '83vh' }}>
+                <div style={{ padding: 30, minHeight: height - 86 - 44 }}>
                     {props.children}
                 </div>
                 <div style={{ paddingLeft: 20, paddingRight: 20 }}>
