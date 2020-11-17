@@ -38,38 +38,21 @@ const TopScreen: React.FC = () => {
     }, []);
 
     // 過去のデータ(firebaseから送られてくるデータ)
-    const _data: ChartData[] = [
-        {
-            "date": "18:30",
-            "temp": 30,
-            "threshold": 28
-        },
-        {
-            "date": "19:00",
-            "temp": 29,
-            "threshold": 28
-        },
-        {
-            "date": "19:30",
-            "temp": 32,
-            "threshold": 28
-        },
-        {
-            "date": "20:30",
-            "temp": 25,
-            "threshold": 28
-        },
-        {
-            "date": "21:00",
-            "temp": 28,
-            "threshold": 28
-        },
-        {
-            "date": "21:30",
-            "temp": 33.4,
-            "threshold": 28
-        },
-    ];
+    const _data: ChartData[] = [];
+    const now = new Date();
+    const _i = 13;
+    now.setMinutes(now.getMinutes() - 30 * _i);
+    for (let i = 0; i < _i; i++) {
+        const _t = Math.round((Math.random() * 10 + 15) * 100) / 100;
+        now.setMinutes(now.getMinutes() + 30);
+        const _n = `${now.getHours()}:${now.getMinutes()}`;
+        const _d: ChartData = {
+            "date": _n,
+            "temp": _t,
+            "threshold": 20
+        };
+        _data.push(_d);
+    }
 
     // 現在のデータ(Arduinoから送られてくるデータ)
     const _currentData: ICurrentData = {

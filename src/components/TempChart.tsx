@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComposedChart, XAxis, YAxis, CartesianGrid, Area, Line, Legend } from 'recharts'
+import { ComposedChart, XAxis, YAxis, CartesianGrid, Area, Line, Legend, Tooltip } from 'recharts'
 import { ChartData } from '../data/model/ChartData';
 
 interface IProps {
@@ -24,8 +24,12 @@ const TempChart: React.FC<IProps> = (props: IProps) => {
             {/* グラフの設定 */}
             <Legend />
             <XAxis dataKey="date" />
-            <YAxis domain={[Math.floor(_min) - 2, Math.ceil(_max) + 2]} />
-            <CartesianGrid strokeDasharray="3 3" />
+            <YAxis unit="℃" allowDecimals={false} minTickGap={1} domain={[Math.floor(_min) - 2, Math.ceil(_max) + 2]} />
+            <CartesianGrid strokeDasharray="1 1" />
+            <Tooltip
+                formatter={value => { return `${value}℃` }}
+                contentStyle={{ backgroundColor: "rgb(2, 17, 20)" }}
+            />
 
             {/* 気温データ */}
             <Area type="monotone" dataKey="temp" stroke="#82ca9d" fillOpacity={1} fill="url(#temp)" />
