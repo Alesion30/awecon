@@ -17,12 +17,12 @@ const Layout: React.FC<IProps> = (props: IProps) => {
                         <Heading node='h1' style={{ margin: 0 }}>AWECON - We control air condition from a remote location</Heading>
                     </Header>
                 </div>
-                <div style={{ padding: 30, minHeight: height - 86 - 44 }}>
+                <div style={{ padding: 30, minHeight: height - 86 - 34 }}>
                     {props.children}
                 </div>
                 <div style={{ paddingLeft: 20, paddingRight: 20 }}>
-                    <Footer animate>
-                        <Heading node='h6'>&copy; 2020 AWECON</Heading>
+                    <Footer animate show={true}>
+                        <Heading node='h6' style={{ paddingBottom: 10, margin: 0 }}>&copy; 2020 AWECON</Heading>
                     </Footer>
                 </div>
             </div>
