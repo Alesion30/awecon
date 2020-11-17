@@ -1,13 +1,22 @@
 import React from 'react';
 import Layout from '../Layout';
-import { Project, Words } from 'arwes';
+
+// recharts
 import TempChart from '../components/TempChart';
 import { ChartData } from '../data/model/ChartData';
+
+// arwes
+import { Project, Words } from 'arwes';
+import { Anim } from '../data/model/Anim';
+
+// util
 import { useWindowDimensions } from '../util/dimensions';
 
 const TopScreen: React.FC = () => {
     const { width } = useWindowDimensions(); // 画面サイズ
+    const _blank = "\u00A0".repeat(4); // 空白文字
 
+    // 過去のデータ(firebaseから送られてくるデータ)
     const data: ChartData[] = [
         {
             "date": "18:30",
@@ -41,16 +50,18 @@ const TopScreen: React.FC = () => {
         },
     ];
 
+    // 現在のデータ(Arduinoから送られてくるデータ)
     const _currentTemp = 24;
-    const _blank = "\u00A0".repeat(4);
+    const _aircon = false;
+    const _auto = true;
 
     return (
         <Layout>
             <Project
                 animate
-                header={`現在の室温: ${_currentTemp}℃${_blank}エアコン: OFF${_blank}オート: OFF`}
+                header={`現在の室温: ${_currentTemp}℃${_blank}エアコン: ${_aircon ? "ON" : "OFF"}${_blank}オート: ${_auto ? "ON" : "OFF"}`}
             >
-                {(anim: any) => (
+                {(anim: Anim) => (
                     <div>
                         <div style={{ width: width * 0.8, margin: 'auto' }}>
                             <Words animate show={anim.entered}>

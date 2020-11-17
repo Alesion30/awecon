@@ -15,17 +15,22 @@ const TempChart: React.FC<IProps> = (props: IProps) => {
     return (
         <ComposedChart data={props.data} width={props.width} height={props.height} style={props.style}
             margin={{ top: 30, right: 30, left: 0, bottom: 0 }}>
+            {/* グラフの設定 */}
+            <Legend />
+            <XAxis dataKey="date" />
+            <YAxis domain={[Math.floor(_min) - 2, Math.ceil(_max) + 2]} />
+            <CartesianGrid strokeDasharray="3 3" />
+
+            {/* 気温データ */}
+            <Area type="monotone" dataKey="temp" stroke="#82ca9d" fillOpacity={1} fill="url(#temp)" />
             <defs>
                 <linearGradient id="temp" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
                     <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
                 </linearGradient>
             </defs>
-            <Legend />
-            <XAxis dataKey="date" />
-            <YAxis domain={[Math.floor(_min) - 2, Math.ceil(_max) + 2]} />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Area type="monotone" dataKey="temp" stroke="#82ca9d" fillOpacity={1} fill="url(#temp)" />
+
+            {/* 閾値 */}
             <Line type="monotone" dataKey="threshold" stroke="#ff7300" />
         </ComposedChart>
     );
