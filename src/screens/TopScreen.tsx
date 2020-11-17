@@ -75,12 +75,13 @@ const TopScreen: React.FC = () => {
     } else {
         _autoText = `${currentData.auto ? "ON" : "OFF"}`
     }
+    const headerText = width > 800 ? `現在の室温: ${_tempText}${_blank}エアコン: ${_airconText}${_blank}オート: ${_autoText}` : `現在の室温: ${_tempText}`;
 
     return (
         <Layout loading={loading}>
             <Project
                 animate
-                header={`現在の室温: ${_tempText}${_blank}エアコン: ${_airconText}${_blank}オート: ${_autoText}`}
+                header={headerText}
             >
                 {(anim: Anim) => (
                     <div>

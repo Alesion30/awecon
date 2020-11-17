@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Awecon",
+  "name": "An application that automatically adjusts the temperature of a room using aruduino",
   "icons": [
     {
       "src": "favicon.ico",

@@ -33,9 +33,9 @@ const Layout: React.FC<IProps> = (props: IProps) => {
                     </Backdrop>
 
                     {/* ヘッダー */}
-                    <div style={{ padding: 20 }}>
+                    <div style={{ paddingLeft: 10, paddingRight: 10, paddingTop: 0, paddingBottom: 0 }}>
                         <Header animate show={anim.entered}>
-                            <Row style={{ marginBottom: 10 }}>
+                            <Row style={{ marginTop: 10, marginBottom: 10 }}>
                                 <Col>
                                     <Logo animate show={anim.entered} size={42} />
                                 </Col>
@@ -49,7 +49,7 @@ const Layout: React.FC<IProps> = (props: IProps) => {
                     </div>
 
                     {/* コンテンツ */}
-                    <div style={{ padding: 30, minHeight: height - 96 - 34 }}>
+                    <div style={{ padding: 20, minHeight: height - 66 - 34 }}>
                         {props.children}
                     </div>
 
