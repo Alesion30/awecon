@@ -3,9 +3,10 @@ import React, { ReactNode } from 'react';
 // 画像
 import bg from './resource/img/bg3.png';
 import pattern from './resource/img/pattern.png'
+import logo from './resource/img/icon.png';
 
 // arwes
-import { Arwes, Logo, Header, Heading, Footer, Row, Col, Words, Loading } from 'arwes';
+import { Arwes, Header, Heading, Footer, Row, Col, Words, Loading } from 'arwes';
 import { Anim } from './data/model/Anim';
 
 // material-ui
@@ -36,8 +37,8 @@ const Layout: React.FC<IProps> = (props: IProps) => {
                     <div style={{ paddingLeft: 10, paddingRight: 10, paddingTop: 0, paddingBottom: 0 }}>
                         <Header animate show={anim.entered}>
                             <Row style={{ marginTop: 10, marginBottom: 10 }}>
-                                <Col>
-                                    <Logo animate show={anim.entered} size={42} />
+                                <Col style={{ height: 42 }}>
+                                    <img src={logo} alt="logo" style={{ width: 42, height: 42 }} />
                                 </Col>
                                 <Col style={{ padding: 0 }}>
                                     <Heading node='h1' style={{ margin: 0 }}>
