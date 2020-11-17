@@ -1,13 +1,11 @@
 import React from 'react';
-import { ThemeProvider, createTheme, Arwes } from 'arwes';
+import { ThemeProvider, createTheme } from 'arwes';
+import Routes from './Routes';
 
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={createTheme()}>
-      <Arwes>
-        <h1>My App</h1>
-        <p>A SciFi Project</p>
-      </Arwes>
+      <Routes />
     </ThemeProvider>
   );
 }
