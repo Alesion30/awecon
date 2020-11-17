@@ -10,8 +10,14 @@ interface IProps {
 }
 const TempChart: React.FC<IProps> = (props: IProps) => {
     const _tempList: number[] = props.data.map(item => { return item.temp });
-    const _max = _tempList.reduce((a, b) => a > b ? a : b);
-    const _min = _tempList.reduce((a, b) => a < b ? a : b);
+    let _max, _min;
+    if (_tempList.length > 0) {
+        _max = _tempList.reduce((a, b) => a > b ? a : b);
+        _min = _tempList.reduce((a, b) => a < b ? a : b);
+    } else {
+        _max = 30;
+        _min = 2;
+    }
     return (
         <ComposedChart data={props.data} width={props.width} height={props.height} style={props.style}
             margin={{ top: 30, right: 30, left: 0, bottom: 0 }}>
