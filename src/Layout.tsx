@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 import { Arwes, Header, Heading, Footer } from 'arwes';
 import { useWindowDimensions } from './util/dimensions';
-import backgroundImg from './resource/img/bg.png';
-import patternImg from './resource/img/pattern.png'
+import bg from './resource/img/bg3.png';
+import pattern from './resource/img/pattern.png'
 
 interface IProps {
     children: ReactNode
@@ -10,7 +10,7 @@ interface IProps {
 const Layout: React.FC<IProps> = (props: IProps) => {
     const { height } = useWindowDimensions(); // 画面サイズ
     return (
-        <Arwes animate background={backgroundImg} pattern={patternImg}>
+        <Arwes animate background={bg} pattern={pattern}>
             <div>
                 <div style={{ padding: 20 }}>
                     <Header animate>
