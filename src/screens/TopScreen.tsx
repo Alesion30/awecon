@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../Layout';
 
 // firebase
-import { firestore } from '../plugin/firebase';
+import FirestoreNetwork from '../data/network/FirestoreNetwork';
+import { PastData } from '../data/model/PastData';
+
+// arduino
+import { CurrentData } from '../data/model/CurrentData';
 
 // recharts
 import TempChart from '../components/TempChart';
-import { ChartData } from '../data/model/ChartData';
 
 // arwes
 import { Project, Words } from 'arwes';
@@ -15,25 +18,20 @@ import { Anim } from '../data/model/Anim';
 // util
 import { useWindowDimensions } from '../util/dimensions';
 
-interface ICurrentData {
-    temp: number | null;
-    aircon: boolean | null;
-    auto: boolean | null;
-}
-
 const TopScreen: React.FC = () => {
     const { width } = useWindowDimensions(); // 画面サイズ
-    const _blank = "\u00A0".repeat(4); // 空白文字
 
     const [loading, setLoading] = useState<boolean>(true); // ロード中
-    const [data, setData] = useState<ChartData[]>([]); // グラフに表示するデータ
-    const [currentData, setCurrentData] = useState<ICurrentData>({ temp: null, aircon: null, auto: null }); // 現在のデータ
+    const [data, setData] = useState<PastData[]>([]); // グラフに表示するデータ
+    const [currentData, setCurrentData] = useState<CurrentData | null>(null); // 現在のデータ
     useEffect(() => {
         const run = async () => {
-            const res = await firestore.collection('data').get();
-            res.forEach(doc => {
-                console.log(doc.data());
-            });
+            try {
+                const res = await FirestoreNetwork.getPastData();
+                console.log(res);
+            } catch (err) {
+                console.log(err);
+            }
             setData(_data);
             setCurrentData(_currentData);
             setLoading(false);
@@ -44,8 +42,8 @@ const TopScreen: React.FC = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // 過去のデータ(firebaseから送られてくるデータ)
-    const _data: ChartData[] = [];
+    // 過去のデータ(firebaseから送られてくるデータ) サンプル
+    const _data: PastData[] = [];
     const now = new Date();
     const _i = 13;
     now.setMinutes(now.getMinutes() - 30 * _i);
@@ -53,35 +51,36 @@ const TopScreen: React.FC = () => {
         const _t = Math.round((Math.random() * 10 + 15) * 100) / 100;
         now.setMinutes(now.getMinutes() + 30);
         const _n = `${now.getHours()}:${now.getMinutes()}`;
-        const _d: ChartData = {
+        const _d: PastData = {
             "date": _n,
-            "temp": _t,
+            "temperature": _t,
             "threshold": 20
         };
         _data.push(_d);
     }
 
-    // 現在のデータ(Arduinoから送られてくるデータ)
-    const _currentData: ICurrentData = {
-        temp: 24,
+    // 現在のデータ(Arduinoから送られてくるデータ) サンプル
+    const _currentData: CurrentData = {
+        temperature: 24,
         aircon: false,
         auto: true
     };
 
     // テキスト
-    const _tempText = `${currentData.temp ?? "-"}℃`;
+    const _tempText = `${currentData?.temperature ?? "-"}℃`;
     let _airconText;
-    if (currentData.aircon == null) {
+    if (currentData?.aircon === undefined) {
         _airconText = `-`;
     } else {
         _airconText = `${currentData.aircon ? "ON" : "OFF"}`
     }
     let _autoText;
-    if (currentData.auto == null) {
+    if (currentData?.auto === undefined) {
         _autoText = `-`;
     } else {
         _autoText = `${currentData.auto ? "ON" : "OFF"}`
     }
+    const _blank = "\u00A0".repeat(4); // 空白文字
     const headerText = width > 800 ? `現在の室温: ${_tempText}${_blank}エアコン: ${_airconText}${_blank}オート: ${_autoText}` : `現在の室温: ${_tempText}`;
 
     return (

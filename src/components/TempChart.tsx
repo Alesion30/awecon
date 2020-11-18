@@ -1,15 +1,15 @@
 import React from 'react';
 import { ComposedChart, XAxis, YAxis, CartesianGrid, Area, Line, Legend, Tooltip } from 'recharts'
-import { ChartData } from '../data/model/ChartData';
+import { PastData } from '../data/model/PastData';
 
 interface IProps {
-    data: ChartData[]
+    data: PastData[]
     width: number
     height: number
     style?: object | undefined
 }
 const TempChart: React.FC<IProps> = (props: IProps) => {
-    const _tempList: number[] = props.data.map(item => { return item.temp });
+    const _tempList: number[] = props.data.map(item => { return item.temperature });
     let _max, _min;
     if (_tempList.length > 0) {
         _max = _tempList.reduce((a, b) => a > b ? a : b);
@@ -32,7 +32,7 @@ const TempChart: React.FC<IProps> = (props: IProps) => {
             />
 
             {/* 気温データ */}
-            <Area type="monotone" dataKey="temp" stroke="#82ca9d" fillOpacity={1} fill="url(#temp)" />
+            <Area type="monotone" dataKey="temperature" stroke="#82ca9d" fillOpacity={1} fill="url(#temp)" />
             <defs>
                 <linearGradient id="temp" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
