@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../Layout';
 
+// firebase
+import { firestore } from '../plugin/firebase';
+
 // recharts
 import TempChart from '../components/TempChart';
 import { ChartData } from '../data/model/ChartData';
@@ -27,6 +30,10 @@ const TopScreen: React.FC = () => {
     const [currentData, setCurrentData] = useState<ICurrentData>({ temp: null, aircon: null, auto: null }); // 現在のデータ
     useEffect(() => {
         const run = async () => {
+            const res = await firestore.collection('data').get();
+            res.forEach(doc => {
+                console.log(doc.data());
+            });
             setData(_data);
             setCurrentData(_currentData);
             setLoading(false);
