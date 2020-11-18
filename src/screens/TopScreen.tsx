@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../Layout';
 
 // firebase
-import FirestoreNetwork from '../data/network/FirestoreNetwork';
+// import FirestoreNetwork from '../data/network/FirestoreNetwork';
 import { PastData } from '../data/model/PastData';
 
 // arduino
+import ArduinoNetwork from '../data/network/ArduinoNetwork';
 import { CurrentData } from '../data/model/CurrentData';
 
 // recharts
@@ -26,14 +27,24 @@ const TopScreen: React.FC = () => {
     const [currentData, setCurrentData] = useState<CurrentData | null>(null); // 現在のデータ
     useEffect(() => {
         const run = async () => {
+            // arduino 現在のデータを取得 (エラーハンドリングはNetwork中で記述。エラー発生時はnullを返す)
+            const temp = await ArduinoNetwork.getCurrentTemp();
+            console.log("室温:", temp);
+            const _currentData: CurrentData = {
+                temperature: temp,
+                aircon: null,
+                auto: null
+            };
+            setCurrentData(_currentData);
+
             try {
-                const res = await FirestoreNetwork.getPastData();
-                console.log(res);
+                // firebase 過去のデータを取得
+                // const res = await FirestoreNetwork.getPastData();
+                // console.log(res);
             } catch (err) {
                 console.log(err);
             }
             setData(_data);
-            setCurrentData(_currentData);
             setLoading(false);
         };
         setTimeout(() => {
@@ -59,23 +70,16 @@ const TopScreen: React.FC = () => {
         _data.push(_d);
     }
 
-    // 現在のデータ(Arduinoから送られてくるデータ) サンプル
-    const _currentData: CurrentData = {
-        temperature: 24,
-        aircon: false,
-        auto: true
-    };
-
     // テキスト
     const _tempText = `${currentData?.temperature ?? "-"}℃`;
     let _airconText;
-    if (currentData?.aircon === undefined) {
+    if (currentData?.aircon === undefined || currentData?.aircon === null) {
         _airconText = `-`;
     } else {
         _airconText = `${currentData.aircon ? "ON" : "OFF"}`
     }
     let _autoText;
-    if (currentData?.auto === undefined) {
+    if (currentData?.auto === undefined || currentData?.auto === null) {
         _autoText = `-`;
     } else {
         _autoText = `${currentData.auto ? "ON" : "OFF"}`

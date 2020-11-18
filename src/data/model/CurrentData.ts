@@ -1,5 +1,5 @@
 export interface CurrentData {
-    temperature: number;
-    aircon: boolean;
-    auto: boolean;
+    temperature: number | null;
+    aircon: boolean | null;
+    auto: boolean | null;
 }

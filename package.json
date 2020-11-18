@@ -12,6 +12,7 @@
     "@types/react-dom": "^16.9.9",
     "@types/recharts": "^1.8.16",
     "arwes": "^1.0.0-alpha.5",
+    "axios": "^0.21.0",
     "firebase": "^8.0.2",
     "moment": "^2.29.1",
     "react": "^17.0.1",
