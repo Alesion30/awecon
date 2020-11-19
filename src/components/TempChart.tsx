@@ -23,7 +23,7 @@ const TempChart: React.FC<IProps> = (props: IProps) => {
             margin={{ top: 30, right: 30, left: 0, bottom: 0 }}>
             {/* グラフの設定 */}
             <Legend />
-            <XAxis dataKey="date" />
+            <XAxis dataKey="dateStr" />
             <YAxis unit="℃" allowDecimals={false} minTickGap={1} domain={[Math.floor(_min) - 2, Math.ceil(_max) + 2]} />
             <CartesianGrid strokeDasharray="1 1" />
             <Tooltip

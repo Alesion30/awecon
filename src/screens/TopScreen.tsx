@@ -18,18 +18,18 @@ import { Anim } from '../data/model/Anim';
 
 // util
 import { useWindowDimensions } from '../util/dimensions';
+import { formatTimestamp } from '../util/timestamp';
 
 const TopScreen: React.FC = () => {
     const { width } = useWindowDimensions(); // 画面サイズ
 
     const [loading, setLoading] = useState<boolean>(true); // ロード中
     const [data, setData] = useState<PastData[]>([]); // グラフに表示するデータ
-    const [currentData, setCurrentData] = useState<CurrentData | null>(null); // 現在のデータ
+    const [currentData, setCurrentData] = useState<CurrentData>({ temperature: null, aircon: null, auto: null }); // 現在のデータ
     useEffect(() => {
         const run = async () => {
             // arduino 現在のデータを取得 (エラーハンドリングはNetwork中で記述。エラー発生時はnullを返す)
             const temp = await ArduinoNetwork.getCurrentTemp();
-            console.log("室温:", temp);
             const _currentData: CurrentData = {
                 temperature: temp,
                 aircon: null,
@@ -49,26 +49,32 @@ const TopScreen: React.FC = () => {
         };
         setTimeout(() => {
             run();
-        }, 3000);
+        }, 1000);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // テキスト
-    const _tempText = `${currentData?.temperature ?? "-"}℃`;
+    const _tempText = `${currentData.temperature ?? "-"}℃`;
     let _airconText;
-    if (currentData?.aircon === undefined || currentData?.aircon === null) {
+    if (currentData.aircon === null) {
         _airconText = `-`;
     } else {
         _airconText = `${currentData.aircon ? "ON" : "OFF"}`
     }
     let _autoText;
-    if (currentData?.auto === undefined || currentData?.auto === null) {
+    if (currentData.auto === null) {
         _autoText = `-`;
     } else {
         _autoText = `${currentData.auto ? "ON" : "OFF"}`
     }
     const _blank = "\u00A0".repeat(4); // 空白文字
+
+    // ヘッダーのテキスト
     const headerText = width > 800 ? `現在の室温: ${_tempText}${_blank}エアコン: ${_airconText}${_blank}オート: ${_autoText}` : `現在の室温: ${_tempText}`;
+
+    // 期間の表示
+    const range = data.length > 0 ? `${formatTimestamp(data[0].date, 'MM月DD日HH時mm分')} ~ ${formatTimestamp(data[data.length - 1].date, 'MM月DD日HH時mm分')}` : null
+    const rangeText = range ? `${range}の室温データを表示しています。` : "Firebaseとの接続に失敗しました。";
 
     return (
         <Layout loading={loading}>
@@ -80,9 +86,9 @@ const TopScreen: React.FC = () => {
                     <div>
                         {loading === false && (
                             <div>
-                                <div style={{ width: width * 0.8, margin: 'auto' }}>
+                                <div style={{ width: width * 0.75, margin: 'auto' }}>
                                     <Words animate show={anim.entered}>
-                                        現在エアコンは作動していません。
+                                        {rangeText}
                                     </Words>
                                 </div>
                                 <TempChart data={data} width={width * 0.8} height={400} style={{ margin: 'auto', marginTop: 10 }} />

@@ -5,8 +5,8 @@ import { round } from '../../util/round';
 
 class FirestoreNetwork {
     public getPastData = async () => {
-        const data: PastData[] = [];
-        const res = await firestore.collection('data').orderBy("date").limit(20).get();
+        const _data: PastData[] = [];
+        const res = await firestore.collection('data').orderBy("date", "desc").limit(30).get();
         res.forEach(doc => {
             // firebaseから送られてきたデータ
             const _docData: FirebaseData = {
@@ -16,18 +16,20 @@ class FirestoreNetwork {
             };
 
             // データ整形
-            const _date = formatTimestamp(_docData.date, 'MM/DD HH:mm');
+            const _date = formatTimestamp(_docData.date, 'HH:mm');
             const _temp = round(_docData.temperature, 2);
             const _threshold = round(_docData.threshold, 1);
 
             // 返り値用のデータ
             const _d: PastData = {
-                date: _date,
+                date: _docData.date,
+                dateStr: _date,
                 temperature: _temp,
                 threshold: _threshold
             };
-            data.push(_d);
+            _data.push(_d);
         });
+        const data = _data.reverse();
         return data;
     }
 }

@@ -2,7 +2,8 @@ import firebase from 'firebase';
 
 // 実際に使用するデータ型
 export interface PastData {
-    date: string;
+    date: firebase.firestore.Timestamp;
+    dateStr: string;
     temperature: number
     threshold: number
 }
