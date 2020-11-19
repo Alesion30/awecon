@@ -6,7 +6,7 @@ import { round } from '../../util/round';
 class FirestoreNetwork {
     public getPastData = async () => {
         const data: PastData[] = [];
-        const res = await firestore.collection('data').get();
+        const res = await firestore.collection('data').orderBy("date").limit(20).get();
         res.forEach(doc => {
             // firebaseから送られてきたデータ
             const _docData: FirebaseData = {
@@ -17,7 +17,7 @@ class FirestoreNetwork {
 
             // データ整形
             const _date = formatTimestamp(_docData.date, 'MM/DD HH:mm');
-            const _temp = round(_docData.temperature, 1);
+            const _temp = round(_docData.temperature, 2);
             const _threshold = round(_docData.threshold, 1);
 
             // 返り値用のデータ

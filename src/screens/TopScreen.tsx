@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../Layout';
 
 // firebase
-// import FirestoreNetwork from '../data/network/FirestoreNetwork';
+import FirestoreNetwork from '../data/network/FirestoreNetwork';
 import { PastData } from '../data/model/PastData';
 
 // arduino
@@ -39,12 +39,12 @@ const TopScreen: React.FC = () => {
 
             try {
                 // firebase 過去のデータを取得
-                // const res = await FirestoreNetwork.getPastData();
-                // console.log(res);
+                const res = await FirestoreNetwork.getPastData();
+                setData(res);
+                console.log(res);
             } catch (err) {
                 console.log(err);
             }
-            setData(_data);
             setLoading(false);
         };
         setTimeout(() => {
@@ -52,23 +52,6 @@ const TopScreen: React.FC = () => {
         }, 3000);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    // 過去のデータ(firebaseから送られてくるデータ) サンプル
-    const _data: PastData[] = [];
-    const now = new Date();
-    const _i = 13;
-    now.setMinutes(now.getMinutes() - 30 * _i);
-    for (let i = 0; i < _i; i++) {
-        const _t = Math.round((Math.random() * 10 + 15) * 100) / 100;
-        now.setMinutes(now.getMinutes() + 30);
-        const _n = `${now.getHours()}:${now.getMinutes()}`;
-        const _d: PastData = {
-            "date": _n,
-            "temperature": _t,
-            "threshold": 20
-        };
-        _data.push(_d);
-    }
 
     // テキスト
     const _tempText = `${currentData?.temperature ?? "-"}℃`;
@@ -99,7 +82,7 @@ const TopScreen: React.FC = () => {
                             <div>
                                 <div style={{ width: width * 0.8, margin: 'auto' }}>
                                     <Words animate show={anim.entered}>
-                                        過去6時間の室温データです。現在エアコンは作動していません。
+                                        現在エアコンは作動していません。
                                     </Words>
                                 </div>
                                 <TempChart data={data} width={width * 0.8} height={400} style={{ margin: 'auto', marginTop: 10 }} />
