@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../Layout';
 
+// arwes
+import { Project, Words } from 'arwes';
+import { Anim } from '../data/model/Anim';
+
+// recharts
+import TempChart from '../components/TempChart';
+
 // firebase
 import FirestoreNetwork from '../data/network/FirestoreNetwork';
 import { PastData } from '../data/model/PastData';
@@ -9,13 +16,6 @@ import { PastData } from '../data/model/PastData';
 import ArduinoNetwork from '../data/network/ArduinoNetwork';
 import { CurrentData } from '../data/model/CurrentData';
 
-// recharts
-import TempChart from '../components/TempChart';
-
-// arwes
-import { Project, Words } from 'arwes';
-import { Anim } from '../data/model/Anim';
-
 // util
 import { useWindowDimensions } from '../util/dimensions';
 import { formatTimestamp } from '../util/timestamp';
@@ -23,12 +23,15 @@ import { formatTimestamp } from '../util/timestamp';
 const TopScreen: React.FC = () => {
     const { width } = useWindowDimensions(); // 画面サイズ
 
+    // state 状態
     const [loading, setLoading] = useState<boolean>(true); // ロード中
-    const [data, setData] = useState<PastData[]>([]); // グラフに表示するデータ
-    const [currentData, setCurrentData] = useState<CurrentData>({ temperature: null, aircon: null, auto: null }); // 現在のデータ
+    const [data, setData] = useState<PastData[]>([]); // グラフに表示するデータ Firebaseからのデータ
+    const [currentData, setCurrentData] = useState<CurrentData>({ temperature: null, aircon: null, auto: null }); // 現在のデータ Arduinoからのデータ
+
+    // componentDidMount 画面リロード時、最初に呼び出される処理
     useEffect(() => {
-        const run = async () => {
-            // arduino 現在のデータを取得 (エラーハンドリングはNetwork中で記述。エラー発生時はnullを返す)
+        // arduino 現在のデータを取得 (エラーハンドリングはNetwork中で記述。エラー発生時はnullを返す)
+        const getArduinoData = async () => {
             const temp = await ArduinoNetwork.getCurrentTemp();
             const _currentData: CurrentData = {
                 temperature: temp,
@@ -36,9 +39,11 @@ const TopScreen: React.FC = () => {
                 auto: null
             };
             setCurrentData(_currentData);
+        }
 
+        // firebase 過去のデータを取得
+        const getFirebaseData = async () => {
             try {
-                // firebase 過去のデータを取得
                 const res = await FirestoreNetwork.getPastData();
                 setData(res);
                 console.log(res);
@@ -47,9 +52,11 @@ const TopScreen: React.FC = () => {
             }
             setLoading(false);
         };
-        setTimeout(() => {
-            run();
-        }, 1000);
+
+        // 実行
+        getArduinoData();
+        getFirebaseData();
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
