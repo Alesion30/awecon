@@ -6,9 +6,8 @@ import pattern from '../../resource/img/pattern.png';
 import logo from '../../resource/img/icon3.png';
 
 // arwes
-import { ThemeProvider, createTheme, Arwes, Header, Footer, Row, Col, Words, Loading, Image } from 'arwes';
+import { ThemeProvider, createTheme, Arwes, Heading, Header, Footer, Row, Col, Words, Loading, Image } from 'arwes';
 import { Anim } from '../../data/model/Anim';
-import CustomHeading from '../../components/CustomHeading';
 
 // material-ui
 import { Backdrop } from '@material-ui/core';
@@ -16,16 +15,27 @@ import { Backdrop } from '@material-ui/core';
 // util
 import { useWindowDimensions } from '../../util/dimensions';
 
+const myTheme = {
+  typography: {
+    fontFamily: '"Langar","Cairo","Noto Sans JP","sans-serif"',
+    headerFontFamily: '"Langar","Cairo","Noto Sans JP","sans-serif"',
+    headerSizes: {
+      h1: 32,
+      h2: 28,
+      h3: 21,
+      h4: 18,
+      h5: 16,
+      h6: 16,
+    },
+    fontSize: 21,
+    lineHeight: 1.5,
+  },
+};
+
 interface IProps {
   children: ReactNode;
   loading?: boolean;
 }
-
-const myTheme = {
-  typography: {
-    fontFamily: '"Langar","Work Sans","M PLUS Rounded 1c","sans-serif"',
-  },
-};
 
 const Layout: React.FC<IProps> = (props: IProps) => {
   const { height } = useWindowDimensions(); // 画面サイズ
@@ -37,11 +47,11 @@ const Layout: React.FC<IProps> = (props: IProps) => {
             {/* ロード画面 */}
             <Backdrop style={{ zIndex: 10 }} open={props.loading === true}>
               <Loading animate full show={anim.entered} />
-              <CustomHeading>
+              <Heading>
                 <Words animate show={anim.entered} style={{ marginTop: 120 }}>
                   データ取得中です
                 </Words>
-              </CustomHeading>
+              </Heading>
             </Backdrop>
 
             {/* ヘッダー */}
@@ -52,11 +62,11 @@ const Layout: React.FC<IProps> = (props: IProps) => {
                     <Image animate show={anim.entered} resources={logo} style={{ width: 42, height: 42 }} />
                   </Col>
                   <Col style={{ padding: 0 }}>
-                    <CustomHeading>
-                      <Words animate show={anim.entered} style={{ marginTop: 2 }}>
+                    <Heading style={{ margin: 0 }}>
+                      <Words animate show={anim.entered}>
                         AWECON
                       </Words>
-                    </CustomHeading>
+                    </Heading>
                   </Col>
                 </Row>
               </Header>
@@ -68,9 +78,11 @@ const Layout: React.FC<IProps> = (props: IProps) => {
             {/* フッター */}
             <div style={{ paddingLeft: 20, paddingRight: 20 }}>
               <Footer animate show={anim.entered}>
-                <Words animate show={anim.entered}>
-                  &copy; 2020 AWECON
-                </Words>
+                <Heading node="h6" style={{ paddingBottom: 10, margin: 0 }}>
+                  <Words animate show={anim.entered}>
+                    &copy; 2020 AWECON
+                  </Words>
+                </Heading>
               </Footer>
             </div>
           </div>
