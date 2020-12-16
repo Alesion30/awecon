@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Layout from './Layout';
-
-// arwes
 import { Project, Words } from 'arwes';
 import { Anim } from '../data/model/Anim';
-
-// recharts
 import TempChart from '../components/TempChart';
-
-// firebase
 import FirestoreNetwork from '../data/network/FirestoreNetwork';
 import { PastData } from '../data/model/PastData';
-
-// arduino
 import ArduinoNetwork from '../data/network/ArduinoNetwork';
 import { CurrentData } from '../data/model/CurrentData';
-
-// util
 import { useWindowDimensions } from '../util/dimensions';
 import { formatTimestamp } from '../util/timestamp';
 

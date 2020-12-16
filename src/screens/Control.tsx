@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Layout from './Layout';
-
-// arwes
 import { Project } from 'arwes';
 import { Anim } from '../data/model/Anim';
+
+// material-ui
+import { FormControl, InputLabel, Select, MenuItem, FormHelperText } from '@material-ui/core';
 
 const ControlScreen: React.FC = () => {
   // state 状態
@@ -23,6 +24,18 @@ const ControlScreen: React.FC = () => {
             {loading === false && (
               <div>
                 <h1>コントローラー画面</h1>
+                <FormControl>
+                  <InputLabel>Age</InputLabel>
+                  <Select value={20}>
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={10}>Ten</MenuItem>
+                    <MenuItem value={20}>Twenty</MenuItem>
+                    <MenuItem value={30}>Thirty</MenuItem>
+                  </Select>
+                  <FormHelperText>Some important helper text</FormHelperText>
+                </FormControl>
               </div>
             )}
           </>

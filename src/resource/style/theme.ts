@@ -1,4 +1,7 @@
-const theme = {
+import { createTheme } from 'arwes';
+import { createMuiTheme } from '@material-ui/core/styles';
+
+export const ArwesTheme = createTheme({
   typography: {
     fontFamily: '"Langar","Noto Sans JP","sans-serif"',
     headerFontFamily: '"Langar","Noto Sans JP","sans-serif"',
@@ -13,5 +16,10 @@ const theme = {
     fontSize: 16,
     lineHeight: 1.5,
   },
-};
-export default theme;
+});
+
+export const MaterialTheme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});

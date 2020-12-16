@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Layout from './Layout';
-
-// arwes
 import { Project, Words } from 'arwes';
 import { Anim } from '../data/model/Anim';
 
