@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import theme from '../../resource/style/theme';
 
 // 画像
 import bg from '../../resource/img/bg3.png';
@@ -15,23 +16,6 @@ import { Backdrop } from '@material-ui/core';
 // util
 import { useWindowDimensions } from '../../util/dimensions';
 
-const myTheme = {
-  typography: {
-    fontFamily: '"Langar","Cairo","Noto Sans JP","sans-serif"',
-    headerFontFamily: '"Langar","Cairo","Noto Sans JP","sans-serif"',
-    headerSizes: {
-      h1: 32,
-      h2: 28,
-      h3: 21,
-      h4: 18,
-      h5: 16,
-      h6: 16,
-    },
-    fontSize: 21,
-    lineHeight: 1.5,
-  },
-};
-
 interface IProps {
   children: ReactNode;
   loading?: boolean;
@@ -40,7 +24,7 @@ interface IProps {
 const Layout: React.FC<IProps> = (props: IProps) => {
   const { height } = useWindowDimensions(); // 画面サイズ
   return (
-    <ThemeProvider theme={createTheme(myTheme)}>
+    <ThemeProvider theme={createTheme(theme)}>
       <Arwes animate background={bg} pattern={pattern}>
         {(anim: Anim) => (
           <div>
