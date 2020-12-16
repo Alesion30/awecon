@@ -1,19 +1,19 @@
 import React, { ReactNode } from 'react';
 
 // 画像
-import bg from './resource/img/bg3.png';
-import pattern from './resource/img/pattern.png';
-import logo from './resource/img/icon3.png';
+import bg from '../../resource/img/bg3.png';
+import pattern from '../../resource/img/pattern.png';
+import logo from '../../resource/img/icon3.png';
 
 // arwes
 import { Arwes, Header, Heading, Footer, Row, Col, Words, Loading, Image } from 'arwes';
-import { Anim } from './data/model/Anim';
+import { Anim } from '../../data/model/Anim';
 
 // material-ui
 import { Backdrop } from '@material-ui/core';
 
 // util
-import { useWindowDimensions } from './util/dimensions';
+import { useWindowDimensions } from '../../util/dimensions';
 
 interface IProps {
   children: ReactNode;

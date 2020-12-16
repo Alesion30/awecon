@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider, createTheme } from 'arwes';
-import Routes from './Routes';
+import Routes from './Router';
 
 const App: React.FC = () => {
   return (
