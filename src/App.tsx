@@ -8,6 +8,6 @@ const App: React.FC = () => {
       <Routes />
     </ThemeProvider>
   );
-}
+};
 
 export default App;
