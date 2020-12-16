@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Layout from './Layout';
 
 // arwes
-import { Project, Words } from 'arwes';
+import { Project } from 'arwes';
 import { Anim } from '../data/model/Anim';
 
-const TopScreen: React.FC = () => {
+const ControlScreen: React.FC = () => {
   // state 状態
   const [loading, setLoading] = useState<boolean>(true); // ロード中
 
@@ -17,14 +17,12 @@ const TopScreen: React.FC = () => {
 
   return (
     <Layout loading={loading}>
-      <Project animate header="awecon">
+      <Project animate header="コントロール">
         {(anim: Anim) => (
           <>
             {loading === false && (
               <div>
-                <Words animate show={anim.entered}>
-                  トップページです
-                </Words>
+                <h1>コントローラー画面</h1>
               </div>
             )}
           </>
@@ -33,4 +31,4 @@ const TopScreen: React.FC = () => {
     </Layout>
   );
 };
-export default TopScreen;
+export default ControlScreen;
