@@ -6,8 +6,9 @@ import pattern from '../../resource/img/pattern.png';
 import logo from '../../resource/img/icon3.png';
 
 // arwes
-import { ThemeProvider, createTheme, Arwes, Header, Heading, Footer, Row, Col, Words, Loading, Image } from 'arwes';
+import { ThemeProvider, createTheme, Arwes, Header, Footer, Row, Col, Words, Loading, Image } from 'arwes';
 import { Anim } from '../../data/model/Anim';
+import CustomHeading from '../../components/CustomHeading';
 
 // material-ui
 import { Backdrop } from '@material-ui/core';
@@ -36,11 +37,11 @@ const Layout: React.FC<IProps> = (props: IProps) => {
             {/* ロード画面 */}
             <Backdrop style={{ zIndex: 10 }} open={props.loading === true}>
               <Loading animate full show={anim.entered} />
-              <Heading node="h6" style={{ marginTop: 110 }}>
-                <Words animate show={anim.entered}>
+              <CustomHeading>
+                <Words animate show={anim.entered} style={{ marginTop: 120 }}>
                   データ取得中です
                 </Words>
-              </Heading>
+              </CustomHeading>
             </Backdrop>
 
             {/* ヘッダー */}
@@ -51,11 +52,11 @@ const Layout: React.FC<IProps> = (props: IProps) => {
                     <Image animate show={anim.entered} resources={logo} style={{ width: 42, height: 42 }} />
                   </Col>
                   <Col style={{ padding: 0 }}>
-                    <Heading node="h1" style={{ margin: 0 }}>
-                      <Words animate show={anim.entered}>
+                    <CustomHeading>
+                      <Words animate show={anim.entered} style={{ marginTop: 2 }}>
                         AWECON
                       </Words>
-                    </Heading>
+                    </CustomHeading>
                   </Col>
                 </Row>
               </Header>
@@ -67,11 +68,9 @@ const Layout: React.FC<IProps> = (props: IProps) => {
             {/* フッター */}
             <div style={{ paddingLeft: 20, paddingRight: 20 }}>
               <Footer animate show={anim.entered}>
-                <Heading node="h6" style={{ paddingBottom: 10, margin: 0 }}>
-                  <Words animate show={anim.entered}>
-                    &copy; 2020 AWECON
-                  </Words>
-                </Heading>
+                <Words animate show={anim.entered}>
+                  &copy; 2020 AWECON
+                </Words>
               </Footer>
             </div>
           </div>
