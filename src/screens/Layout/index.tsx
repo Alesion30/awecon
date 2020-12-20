@@ -31,7 +31,7 @@ const Layout: React.FC<IProps> = (props: IProps) => {
           {/* ヘッダー */}
           <div style={{ paddingLeft: 10, paddingRight: 10, paddingTop: 0, paddingBottom: 0 }}>
             <Header animate show={anim.entered}>
-              <Row style={{ marginTop: 10, marginBottom: 10 }}>
+              <Row style={{ marginTop: 10, marginBottom: 0 }}>
                 <Col style={{ height: 42 }}>
                   <Image animate show={anim.entered} resources={logo} style={{ width: 42, height: 42 }} />
                 </Col>

@@ -4,6 +4,7 @@ import { Project } from 'arwes';
 import { Anim } from '../data/model/Anim';
 import { Option } from '../data/model/Option';
 import CustomSelect from '../components/CustomSelect';
+import Button from '@material-ui/core/Button';
 
 const ControlScreen: React.FC = () => {
   // state 状態
@@ -32,79 +33,88 @@ const ControlScreen: React.FC = () => {
   // 風量(0~5)
   const [fun, setFun] = useState<number>(0);
   const funList: Option[] = [
-    { label: '', value: 0 },
-    { label: '', value: 1 },
-    { label: '', value: 2 },
-    { label: '', value: 3 },
-    { label: '', value: 4 },
-    { label: '', value: 5 },
+    { label: '自動', value: 0 },
+    { label: '1', value: 1 },
+    { label: '2', value: 2 },
+    { label: '3', value: 3 },
+    { label: '4', value: 4 },
+    { label: '5', value: 5 },
   ];
   // 風向の高さ(0~6)
   const [vd, setVd] = useState<number>(0);
   const vdList: Option[] = [
-    { label: '', value: 0 },
-    { label: '', value: 1 },
-    { label: '', value: 2 },
-    { label: '', value: 3 },
-    { label: '', value: 4 },
-    { label: '', value: 5 },
-    { label: '', value: 6 },
+    { label: '自動', value: 0 },
+    { label: '1', value: 1 },
+    { label: '2', value: 2 },
+    { label: '3', value: 3 },
+    { label: '4', value: 4 },
+    { label: '5', value: 5 },
+    { label: '6', value: 6 },
   ];
   // 風向の左右(0~6)
   const [hd, setHd] = useState<number>(0);
   const hdList: Option[] = [
-    { label: '', value: 0 },
-    { label: '', value: 1 },
-    { label: '', value: 2 },
-    { label: '', value: 3 },
-    { label: '', value: 4 },
-    { label: '', value: 5 },
-    { label: '', value: 6 },
+    { label: '自動', value: 0 },
+    { label: '1', value: 1 },
+    { label: '2', value: 2 },
+    { label: '3', value: 3 },
+    { label: '4', value: 4 },
+    { label: '5', value: 5 },
+    { label: '6', value: 6 },
   ];
 
   return (
     <Layout loading={loading}>
-      <Project animate header="コントロール">
+      <Project animate header="エアコンの操作">
         {(anim: Anim) => (
           <>
             {loading === false && (
               <div>
-                <h1>コントローラー画面</h1>
-                <CustomSelect
-                  label="温度"
-                  value={temp}
-                  onChange={(e) => setTemp(e.target.value as number)}
-                  items={tempList}
-                  style={{ margin: 10 }}
-                />
-                <CustomSelect
-                  label="運転モード"
-                  value={mode}
-                  onChange={(e) => setMode(e.target.value as number)}
-                  items={modeList}
-                  style={{ margin: 10 }}
-                />
-                <CustomSelect
-                  label="風量"
-                  value={fun}
-                  onChange={(e) => setFun(e.target.value as number)}
-                  items={funList}
-                  style={{ margin: 10 }}
-                />
-                <CustomSelect
-                  label="風向の高さ"
-                  value={vd}
-                  onChange={(e) => setVd(e.target.value as number)}
-                  items={vdList}
-                  style={{ margin: 10 }}
-                />
-                <CustomSelect
-                  label="風向の左右"
-                  value={hd}
-                  onChange={(e) => setHd(e.target.value as number)}
-                  items={hdList}
-                  style={{ margin: 10 }}
-                />
+                <div>
+                  <CustomSelect
+                    label="温度"
+                    value={temp}
+                    onChange={(e) => setTemp(e.target.value as number)}
+                    items={tempList}
+                    style={{ margin: 10 }}
+                  />
+                  <CustomSelect
+                    label="運転モード"
+                    value={mode}
+                    onChange={(e) => setMode(e.target.value as number)}
+                    items={modeList}
+                    style={{ margin: 10 }}
+                  />
+                  <CustomSelect
+                    label="風量"
+                    value={fun}
+                    onChange={(e) => setFun(e.target.value as number)}
+                    items={funList}
+                    style={{ margin: 10 }}
+                  />
+                  <CustomSelect
+                    label="風向の高さ"
+                    value={vd}
+                    onChange={(e) => setVd(e.target.value as number)}
+                    items={vdList}
+                    style={{ margin: 10 }}
+                  />
+                  <CustomSelect
+                    label="風向の左右"
+                    value={hd}
+                    onChange={(e) => setHd(e.target.value as number)}
+                    items={hdList}
+                    style={{ margin: 10 }}
+                  />
+                </div>
+                <div style={{ marginTop: 10 }}>
+                  <Button variant="contained" color="primary" style={{ margin: 10 }}>
+                    エアコンをつける
+                  </Button>
+                  <Button variant="contained" color="secondary" style={{ margin: 10 }}>
+                    エアコンを停止
+                  </Button>
+                </div>
               </div>
             )}
           </>
