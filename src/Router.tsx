@@ -2,17 +2,13 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // screens
-import Top from './screens/Top';
-import Control from './screens/Control';
-import Temp from './screens/Temp';
+import Screen from './screens';
 
 const Router: React.FC = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={Top} />
-        <Route exact path="/control" component={Control} />
-        <Route exact path="/temp" component={Temp} />
+        <Route exact path="/" component={Screen} />
       </Switch>
     </BrowserRouter>
   );

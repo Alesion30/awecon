@@ -22,7 +22,7 @@ const Layout: React.FC<IProps> = (props: IProps) => {
           <Backdrop style={{ zIndex: 10 }} open={props.loading === true}>
             <Loading animate full show={anim.entered} />
             <Heading>
-              <Words animate show={anim.entered} style={{ marginTop: 120 }}>
+              <Words animate show={anim.entered} style={{ marginTop: 140, fontSize: 18 }}>
                 データ取得中です
               </Words>
             </Heading>
