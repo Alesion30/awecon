@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Project } from 'arwes';
 import { Anim } from '../../data/model/Anim';
 import { Option } from '../../data/model/Option';
@@ -55,6 +55,26 @@ const Control: React.FC = () => {
     { label: '6', value: 6 },
   ];
 
+  useEffect(() => {
+    const settingStr = localStorage.getItem('setting');
+    const setting: Setting | null = settingStr ? JSON.parse(settingStr) : null;
+    if (setting && 'mode' in setting) {
+      setMode(setting.mode);
+    }
+    if (setting && 'fan' in setting) {
+      setFan(setting.fan);
+    }
+    if (setting && 'temp' in setting) {
+      setTemp(setting.temp);
+    }
+    if (setting && 'vdir' in setting) {
+      setVd(setting.vdir);
+    }
+    if (setting && 'hdir' in setting) {
+      setHd(setting.hdir);
+    }
+  }, []);
+
   // 「エアコンを起動」クリック時
   const handleStart = async () => {
     try {
@@ -66,6 +86,7 @@ const Control: React.FC = () => {
         hdir: hd,
       };
       await ArduinoNetwork.controlAircon(setting);
+      localStorage.setItem('setting', JSON.stringify(setting));
       alert('送信しました！！');
     } catch (err) {
       console.log(err);
