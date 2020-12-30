@@ -26,33 +26,33 @@ const Control: React.FC = () => {
   const [fan, setFan] = useState<Setting['fan']>(0);
   const fanList: Option[] = [
     { label: '自動', value: 0 },
-    { label: '1', value: 1 },
-    { label: '2', value: 2 },
-    { label: '3', value: 3 },
-    { label: '4', value: 4 },
-    { label: '5', value: 5 },
+    { label: 'しずか', value: 1 },
+    { label: '小', value: 2 },
+    { label: '中', value: 3 },
+    { label: '大', value: 4 },
+    { label: '最大', value: 5 },
   ];
   // 風向の高さ(0~6)
   const [vd, setVd] = useState<Setting['vdir']>(0);
   const vdList: Option[] = [
     { label: '自動', value: 0 },
-    { label: '1', value: 1 },
-    { label: '2', value: 2 },
-    { label: '3', value: 3 },
-    { label: '4', value: 4 },
-    { label: '5', value: 5 },
-    { label: '6', value: 6 },
+    { label: 'スイング', value: 1 },
+    { label: '天井', value: 2 },
+    { label: '上向き', value: 3 },
+    { label: 'やや上向き', value: 4 },
+    { label: 'やや下向き', value: 5 },
+    { label: '下向き', value: 6 },
   ];
   // 風向の左右(0~6)
   const [hd, setHd] = useState<Setting['hdir']>(0);
   const hdList: Option[] = [
     { label: '自動', value: 0 },
-    { label: '1', value: 1 },
-    { label: '2', value: 2 },
-    { label: '3', value: 3 },
-    { label: '4', value: 4 },
-    { label: '5', value: 5 },
-    { label: '6', value: 6 },
+    { label: 'スイング', value: 1 },
+    { label: '左向き', value: 2 },
+    { label: 'やや左向き', value: 3 },
+    { label: '真ん中', value: 4 },
+    { label: 'やや右向き', value: 5 },
+    { label: '右向き', value: 6 },
   ];
 
   useEffect(() => {
