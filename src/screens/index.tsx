@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Layout from './Layout';
 import styled from 'styled-components';
-import Movie from './Project/Movie';
 import Top from './Project/Top';
 import Temp from './Project/Temp';
 import Control from './Project/Control';
@@ -51,8 +50,6 @@ const index: React.FC = () => {
 
   return (
     <Layout loading={loading}>
-      <Movie />
-      <Divider />
       <Top />
       <Divider />
       <Control />
