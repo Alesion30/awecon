@@ -4,6 +4,8 @@ import { Anim } from '../../data/model/Anim';
 import SpeechBalloonComponent from '../../components/SpeechBalloon';
 
 const Top: React.FC = () => {
+  const startTime = 6000;
+  const waitTime = 700;
   return (
     <Project animate header="aweconについて">
       {(anim: Anim) => (
@@ -20,21 +22,21 @@ const Top: React.FC = () => {
             borderColor="rgb(100, 60, 100)"
             backgroundColor="rgba(100, 60, 100, 0.4)"
             show={anim.entered}
-            start={2000}
+            start={2500}
           />
           <SpeechBalloonComponent
             title="「リモコンを取りに行くのは面倒だけど、スマホなら手元にある」"
             borderColor="rgb(50, 120, 100)"
             backgroundColor="rgba(50, 120, 100, 0.4)"
             show={anim.entered}
-            start={3000}
+            start={4000}
           />
           <div style={{ height: 15 }} />
           <p
             style={{
               fontSize: 20,
               marginBottom: 10,
-              transition: `opacity 1500ms 4000ms ease`,
+              transition: `opacity ${waitTime}ms ${startTime}ms ease`,
               opacity: anim.entered ? 1 : 0,
             }}
           >
@@ -46,7 +48,7 @@ const Top: React.FC = () => {
             style={{
               fontSize: 20,
               marginBottom: 10,
-              transition: `opacity 1500ms 5500ms ease`,
+              transition: `opacity ${waitTime}ms ${startTime + 2 * waitTime}ms ease`,
               opacity: anim.entered ? 1 : 0,
             }}
           >
@@ -58,7 +60,7 @@ const Top: React.FC = () => {
             style={{
               fontSize: 20,
               marginBottom: 10,
-              transition: `opacity 1500ms 7000ms ease`,
+              transition: `opacity ${waitTime}ms ${startTime + 4 * waitTime}ms ease`,
               opacity: anim.entered ? 1 : 0,
             }}
           >
