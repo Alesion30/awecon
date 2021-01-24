@@ -32,6 +32,8 @@ const Top: React.FC = () => {
           <div style={{ height: 15 }} />
           <p
             style={{
+              fontSize: 20,
+              marginBottom: 10,
               transition: `opacity 1500ms 4000ms ease`,
               opacity: anim.entered ? 1 : 0,
             }}
@@ -42,6 +44,8 @@ const Top: React.FC = () => {
           </p>
           <p
             style={{
+              fontSize: 20,
+              marginBottom: 10,
               transition: `opacity 1500ms 5500ms ease`,
               opacity: anim.entered ? 1 : 0,
             }}
@@ -52,6 +56,8 @@ const Top: React.FC = () => {
           </p>
           <p
             style={{
+              fontSize: 20,
+              marginBottom: 10,
               transition: `opacity 1500ms 7000ms ease`,
               opacity: anim.entered ? 1 : 0,
             }}
