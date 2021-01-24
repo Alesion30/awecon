@@ -6,9 +6,12 @@ interface IProps {
   show: boolean;
   backgroundColor: string;
   borderColor: string;
+  start?: number;
 }
 
 const SpeechBalloonComponent: React.FC<IProps> = (props) => {
+  const startTime = props.start ?? 0;
+  const waitTime = 200;
   return (
     <div>
       <div
@@ -23,7 +26,7 @@ const SpeechBalloonComponent: React.FC<IProps> = (props) => {
           margin: '0 10px 10px 10px',
 
           // アニメーション
-          transition: 'opacity 1000ms 500ms ease',
+          transition: `opacity ${startTime + waitTime}ms ${startTime}ms ease`,
           opacity: props.show ? 1 : 0,
         }}
       >
@@ -44,7 +47,7 @@ const SpeechBalloonComponent: React.FC<IProps> = (props) => {
           verticalAlign: 'bottom',
 
           // アニメーション
-          transition: 'opacity 1500ms 1000ms ease',
+          transition: `opacity ${startTime + 2 * waitTime}ms ${startTime + waitTime}ms ease`,
           opacity: props.show ? 1 : 0,
         }}
       ></div>
@@ -61,7 +64,7 @@ const SpeechBalloonComponent: React.FC<IProps> = (props) => {
           verticalAlign: 'bottom',
 
           // アニメーション
-          transition: 'opacity 2000ms 1500ms ease',
+          transition: `opacity ${startTime + 3 * waitTime}ms ${startTime + 2 * waitTime}ms ease`,
           opacity: props.show ? 1 : 0,
         }}
       ></div>
@@ -77,7 +80,7 @@ const SpeechBalloonComponent: React.FC<IProps> = (props) => {
           verticalAlign: 'bottom',
 
           // アニメーション
-          transition: 'opacity 2500ms 2000ms ease',
+          transition: `opacity ${startTime + 4 * waitTime}ms ${startTime + 3 * waitTime}ms ease`,
           opacity: props.show ? 1 : 0,
         }}
       ></div>
